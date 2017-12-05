@@ -1,4 +1,4 @@
-package model;
+package andersen.model;
 
 import java.math.BigDecimal;
 import java.util.Set;

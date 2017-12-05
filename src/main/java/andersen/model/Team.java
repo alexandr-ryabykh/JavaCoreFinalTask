@@ -1,4 +1,4 @@
-package model;
+package andersen.model;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package model;
+package andersen.model;
 
 public class Skill {
     private Long id;
