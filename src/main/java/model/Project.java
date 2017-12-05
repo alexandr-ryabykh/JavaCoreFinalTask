@@ -39,10 +39,11 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", teams=" + teams +
-                '}';
+        StringBuilder builder = new StringBuilder();
+        for (Team team : teams) {
+            builder.append(team.getName()).append(",");
+        }
+        String teamsString = builder.substring(0, builder.length() - 1);
+        return id + ";" + name + ";" + teamsString;
     }
 }

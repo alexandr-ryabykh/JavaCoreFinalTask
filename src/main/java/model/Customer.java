@@ -60,12 +60,11 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", projects=" + projects +
-                '}';
+        StringBuilder builder = new StringBuilder();
+        for (Project project : projects) {
+            builder.append(project.getName()).append(",");
+        }
+        String projectsString = builder.substring(0, builder.length() - 1);
+        return id + ";" + firstName + ";" + lastName + ";" + address + ";" + projectsString;
     }
 }

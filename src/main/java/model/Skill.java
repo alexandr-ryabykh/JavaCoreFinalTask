@@ -4,6 +4,9 @@ public class Skill {
     private Long id;
     private String name;
 
+    public Skill(String name) {
+    }
+
     public Long getId() {
         return id;
     }
@@ -22,9 +25,6 @@ public class Skill {
 
     @Override
     public String toString() {
-        return "Skill{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return id + ";" + name;
     }
 }

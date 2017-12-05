@@ -40,10 +40,11 @@ public class Company {
 
     @Override
     public String toString() {
-        return "Company{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", projects=" + projects +
-                '}';
+        StringBuilder builder = new StringBuilder();
+        for (Project project : projects) {
+            builder.append(project.getName()).append(",");
+        }
+        String projectsString = builder.substring(0, builder.length() - 1);
+        return id + "," + name + "," + projectsString;
     }
 }

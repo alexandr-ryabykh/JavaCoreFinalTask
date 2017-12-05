@@ -70,13 +70,11 @@ public class Developer {
 
     @Override
     public String toString() {
-        return "Developer{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", speciality='" + speciality + '\'' +
-                ", skills=" + skills +
-                ", salary=" + salary +
-                '}';
+        StringBuilder builder = new StringBuilder();
+        for (Skill skill : skills) {
+            builder.append(skill.getName()).append(",");
+        }
+        String skillsString = builder.substring(0, builder.length() - 1);
+        return id + ";" + firstName + ";" + lastName + ";" + speciality + ";" + salary + ";" + skillsString;
     }
 }
