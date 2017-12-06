@@ -2,6 +2,7 @@ package andersen.dao;
 
 import andersen.model.Id;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -22,13 +23,13 @@ public interface CrudDAO<T extends Id> {
 
     void delete(Long id) throws IOException;
 
+    boolean verifyId(Long id) throws IOException;
+
     default T create(T entity, Path path, Path pathId) throws IOException {
         Objects.requireNonNull(entity);
-
         Long oldId = Long.parseLong(Files.readAllLines(pathId).get(0));
         Long currentId = oldId + 1;
         entity.setId(currentId);
-
         List<String> ids = Collections.singletonList(currentId.toString());
         Files.write(pathId, ids, StandardCharsets.UTF_8);
         List<String> lines = Collections.singletonList(entity.toString());
@@ -39,10 +40,8 @@ public interface CrudDAO<T extends Id> {
 
     default String read(Long id, Path path) throws IOException {
         Objects.requireNonNull(id);
-
         List<String> entity = Files.readAllLines(path);
         String result = null;
-
         for (String s : entity) {
             if (s.split(";")[0].equals(id.toString())) {
                 result = s;
@@ -55,10 +54,8 @@ public interface CrudDAO<T extends Id> {
     default boolean update(Long id, T entity, Path path) throws IOException {
         Objects.requireNonNull(id);
         Objects.requireNonNull(entity);
-
         List<String> entities = Files.readAllLines(path);
         String oldString;
-
         for (String s : entities) {
             if (s.split(";")[0].equals(id.toString())) {
                 oldString = s;
@@ -77,7 +74,6 @@ public interface CrudDAO<T extends Id> {
         Objects.requireNonNull(id);
         List<String> entities = Files.readAllLines(path);
         String oldEntityString;
-
         for (String s : entities) {
             if (s.split(";")[0].equals(id.toString())) {
                 oldEntityString = s;
@@ -90,4 +86,14 @@ public interface CrudDAO<T extends Id> {
         }
     }
 
+    default boolean verifyId(Long id, Path path) throws IOException {
+        Objects.requireNonNull(id);
+        List<String> entities = Files.readAllLines(path);
+        for (String s : entities) {
+            if (s.split(";")[0].equals(id.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

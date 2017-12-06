@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 
 public class CompanyDAOImpl implements CrudDAO<Company> {
     private final static Path PATH = Paths.get("src/main/resources/company.txt");
-    private final static Path PATH_ID = Paths.get("src/main/resources/companyId.txt");
+    private final static Path PATH_ID = Paths.get("src/main/resources/util/companyId.txt");
 
     @Override
     public Company create(Company entity) throws IOException {
@@ -29,5 +29,9 @@ public class CompanyDAOImpl implements CrudDAO<Company> {
     public void delete(Long id) throws IOException {
         delete(id, PATH);
     }
+    @Override
+    public boolean verifyId(Long id) throws IOException {
 
+        return verifyId(id, PATH);
+    }
 }

@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 public class SkillDAOImpl implements CrudDAO<Skill> {
 
     private final static Path PATH = Paths.get("src/main/resources/skills.txt");
-    private final static Path PATH_ID = Paths.get("src/main/resources/skillsId.txt");
+    private final static Path PATH_ID = Paths.get("src/main/resources/util/skillsId.txt");
 
     @Override
     public Skill create(Skill entity) throws IOException {
@@ -31,4 +31,18 @@ public class SkillDAOImpl implements CrudDAO<Skill> {
         delete(id, PATH);
     }
 
+    @Override
+    public boolean verifyId(Long id) throws IOException {
+
+        return verifyId(id, PATH);
+    }
+
+    public Skill getById(Long id) throws IOException {
+        String skillString = read(id);
+        String[] strings = skillString.split(";");
+        Skill skill = new Skill(strings[1]);
+        skill.setId(id);
+
+        return skill;
+    }
 }

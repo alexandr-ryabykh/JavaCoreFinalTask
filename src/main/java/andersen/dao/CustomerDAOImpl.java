@@ -8,16 +8,11 @@ import java.nio.file.Paths;
 
 public class CustomerDAOImpl implements CrudDAO<Customer> {
     private final static Path PATH = Paths.get("src/main/resources/customers.txt");
-    private final static Path PATH_ID = Paths.get("src/main/resources/customersId.txt");
+    private final static Path PATH_ID = Paths.get("src/main/resources/util/customersId.txt");
 
     @Override
     public Customer create(Customer entity) throws IOException {
         return create(entity, PATH, PATH_ID);
-    }
-
-    @Override
-    public void delete(Long id) throws IOException {
-        delete(id, PATH);
     }
 
     @Override
@@ -30,4 +25,14 @@ public class CustomerDAOImpl implements CrudDAO<Customer> {
         return update(id, entity, PATH);
     }
 
+    @Override
+    public void delete(Long id) throws IOException {
+        delete(id, PATH);
+    }
+
+    @Override
+    public boolean verifyId(Long id) throws IOException {
+
+        return verifyId(id, PATH);
+    }
 }
