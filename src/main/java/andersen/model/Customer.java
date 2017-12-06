@@ -2,7 +2,7 @@ package andersen.model;
 
 import java.util.Set;
 
-public class Customer {
+public class Customer implements Id {
 
     private Long id;
     private String firstName;
@@ -10,8 +10,7 @@ public class Customer {
     private String address;
     private Set<Project> projects;
 
-    public Customer(Long id, String firstName, String lastName, String address, Set<Project> projects) {
-        this.id = id;
+    public Customer(String firstName, String lastName, String address, Set<Project> projects) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -22,6 +21,7 @@ public class Customer {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -65,6 +65,6 @@ public class Customer {
             builder.append(project.getName()).append(",");
         }
         String projectsString = builder.substring(0, builder.length() - 1);
-        return id + ";" + firstName + ";" + lastName + ";" + address + ";" + projectsString;
+        return id + ";" + firstName + ";" + lastName + ";" + address + ";" + "{" + projectsString + "}";
     }
 }

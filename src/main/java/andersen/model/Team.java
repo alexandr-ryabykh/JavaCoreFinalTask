@@ -2,13 +2,12 @@ package andersen.model;
 
 import java.util.Set;
 
-public class Team {
+public class Team implements Id {
     private Long id;
     private String name;
     private Set<Developer> developers;
 
-    public Team(Long id, String name, Set<Developer> developers) {
-        this.id = id;
+    public Team(String name, Set<Developer> developers) {
         this.name = name;
         this.developers = developers;
     }
@@ -44,6 +43,6 @@ public class Team {
             builder.append(dev.getLastName()).append(",");
         }
         String developersString = builder.substring(0, builder.length() - 1);
-        return id + ";" + name + ";" + developersString;
+        return id + ";" + name + ";" + "{" + developersString+ "}";
     }
 }
