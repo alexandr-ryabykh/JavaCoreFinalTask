@@ -40,9 +40,9 @@ public class Team implements Id {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Developer dev : developers) {
-            builder.append(dev.getLastName()).append(",");
+            builder.append(dev.getId()).append(",");
         }
         String developersString = builder.substring(0, builder.length() - 1);
-        return id + ";" + name + ";" + "{" + developersString+ "}";
+        return id + ";" + name + ";" + developersString;
     }
 }

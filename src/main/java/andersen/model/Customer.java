@@ -62,9 +62,9 @@ public class Customer implements Id {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Project project : projects) {
-            builder.append(project.getName()).append(",");
+            builder.append(project.getId()).append(",");
         }
         String projectsString = builder.substring(0, builder.length() - 1);
-        return id + ";" + firstName + ";" + lastName + ";" + address + ";" + "{" + projectsString + "}";
+        return  id + ";" + firstName  + ";" + lastName + ";" + address + ";" + projectsString;
     }
 }

@@ -72,9 +72,9 @@ public class Developer implements Id {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Skill skill : skills) {
-            builder.append(skill.getName()).append(",");
+            builder.append(skill.getId()).append(",");
         }
         String skillsString = builder.substring(0, builder.length() - 1);
-        return id + ";" + firstName + ";" + lastName + ";" + speciality + ";" + salary + ";" + "{" + skillsString + "}";
+        return id + ";" + firstName + ";" + lastName + ";" + speciality + ";" + salary + ";" + skillsString;
     }
 }
