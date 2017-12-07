@@ -43,6 +43,6 @@ public class Team implements Id {
             builder.append(dev.getId()).append(",");
         }
         String developersString = builder.substring(0, builder.length() - 1);
-        return id + ";" + name + ";" + "{" + developersString + "}";
+        return id + ";" + name + ";" + developersString;
     }
 }

@@ -75,6 +75,6 @@ public class Developer implements Id {
             builder.append(skill.getId()).append(",");
         }
         String skillsString = builder.substring(0, builder.length() - 1);
-        return id + ";" + firstName + ";" + lastName + ";" + speciality + ";" + salary + ";" + "{" + skillsString + "}";
+        return id + ";" + firstName + ";" + lastName + ";" + speciality + ";" + salary + ";" + skillsString;
     }
 }

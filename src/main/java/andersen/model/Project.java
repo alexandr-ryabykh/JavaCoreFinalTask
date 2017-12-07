@@ -43,6 +43,6 @@ public class Project implements Id {
             builder.append(team.getId()).append(",");
         }
         String teamsString = builder.substring(0, builder.length() - 1);
-        return id + ";" + name + ";" + "{" + teamsString + "}";
+        return id + ";" + name + ";" + teamsString;
     }
 }

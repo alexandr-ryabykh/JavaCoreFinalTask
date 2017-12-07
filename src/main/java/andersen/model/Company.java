@@ -45,6 +45,6 @@ public class Company implements Id {
             builder.append(project.getId()).append(",");
         }
         String projectsString = builder.substring(0, builder.length() - 1);
-        return id + ";" + name + ";" + "{" + projectsString + "}";
+        return id + ";" + name + ";" + projectsString;
     }
 }

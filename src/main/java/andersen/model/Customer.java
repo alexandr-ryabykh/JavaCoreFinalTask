@@ -65,6 +65,6 @@ public class Customer implements Id {
             builder.append(project.getId()).append(",");
         }
         String projectsString = builder.substring(0, builder.length() - 1);
-        return id + ";" + firstName + ";" + lastName + ";" + address + ";" + "{" + projectsString + "}";
+        return id + ";" + firstName + ";" + lastName + ";" + address + ";" +projectsString;
     }
 }
