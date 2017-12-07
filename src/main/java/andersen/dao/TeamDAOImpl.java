@@ -37,26 +37,22 @@ public class TeamDAOImpl implements CrudDAO<Team> {
 
     @Override
     public boolean verifyId(Long id) throws IOException {
-
         return verifyId(id, PATH);
     }
 
     public Team getById(Long id) throws IOException {
         String teamString = read(id);
-
         String[] strings = teamString.split(";");
-
         String name = strings[1];
 
         Set<Developer> developers = new HashSet<>();
-        String[] developersIds = strings[2].split(",");
-        for (String idString : developersIds) {
+        String[] developersId = strings[2].split(",");
+        for (String idString : developersId) {
             developers.add(developerDAO.getById(Long.parseLong(idString)));
         }
 
         Team team = new Team(name, developers);
         team.setId(id);
-
         return team;
     }
 }

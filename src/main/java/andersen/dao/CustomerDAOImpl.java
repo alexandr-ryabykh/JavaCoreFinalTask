@@ -32,7 +32,6 @@ public class CustomerDAOImpl implements CrudDAO<Customer> {
 
     @Override
     public boolean verifyId(Long id) throws IOException {
-
         return verifyId(id, PATH);
     }
 }

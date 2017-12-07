@@ -26,12 +26,12 @@ public interface CrudDAO<T extends Id> {
     boolean verifyId(Long id) throws IOException;
 
     default T create(T entity, Path path, Path pathId) throws IOException {
-        Objects.requireNonNull(entity);
-        Long oldId = Long.parseLong(Files.readAllLines(pathId).get(0));
-        Long currentId = oldId + 1;
+        Long previousId = Long.parseLong(Files.readAllLines(pathId).get(0));
+        Long currentId = previousId + 1;
         entity.setId(currentId);
-        List<String> ids = Collections.singletonList(currentId.toString());
-        Files.write(pathId, ids, StandardCharsets.UTF_8);
+        List<String> id = Collections.singletonList(currentId.toString());
+        Files.write(pathId, id, StandardCharsets.UTF_8);
+
         List<String> lines = Collections.singletonList(entity.toString());
         Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
 
@@ -39,7 +39,6 @@ public interface CrudDAO<T extends Id> {
     }
 
     default String read(Long id, Path path) throws IOException {
-        Objects.requireNonNull(id);
         List<String> entity = Files.readAllLines(path);
         String result = null;
         for (String s : entity) {
@@ -52,17 +51,15 @@ public interface CrudDAO<T extends Id> {
     }
 
     default boolean update(Long id, T entity, Path path) throws IOException {
-        Objects.requireNonNull(id);
-        Objects.requireNonNull(entity);
         List<String> entities = Files.readAllLines(path);
-        String oldString;
+        String previousString;
         for (String s : entities) {
             if (s.split(";")[0].equals(id.toString())) {
-                oldString = s;
+                previousString = s;
                 entity.setId(id);
                 Files.write(path,
                         new String(Files.readAllBytes(path), StandardCharsets.UTF_8)
-                                .replace(oldString, entity.toString())
+                                .replace(previousString, entity.toString())
                                 .getBytes(StandardCharsets.UTF_8));
                 return true;
             }
@@ -71,15 +68,14 @@ public interface CrudDAO<T extends Id> {
     }
 
     default void delete(Long id, Path path) throws IOException {
-        Objects.requireNonNull(id);
         List<String> entities = Files.readAllLines(path);
-        String oldEntityString;
+        String previousString;
         for (String s : entities) {
             if (s.split(";")[0].equals(id.toString())) {
-                oldEntityString = s;
+                previousString = s;
                 Files.write(path,
                         new String(Files.readAllBytes(path), StandardCharsets.UTF_8)
-                                .replace(oldEntityString, "").trim()
+                                .replace(previousString, "").trim()
                                 .getBytes(StandardCharsets.UTF_8));
                 break;
             }
@@ -87,7 +83,6 @@ public interface CrudDAO<T extends Id> {
     }
 
     default boolean verifyId(Long id, Path path) throws IOException {
-        Objects.requireNonNull(id);
         List<String> entities = Files.readAllLines(path);
         for (String s : entities) {
             if (s.split(";")[0].equals(id.toString())) {

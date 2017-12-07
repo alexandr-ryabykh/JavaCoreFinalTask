@@ -39,30 +39,25 @@ public class DeveloperDAOImpl implements CrudDAO<Developer> {
 
     @Override
     public boolean verifyId(Long id) throws IOException {
-
         return verifyId(id, PATH);
     }
 
     public Developer getById(Long id) throws IOException {
-
-        String developerString = read(id);
-
-        String[] strings = developerString.split(";");
-
+        String developer = read(id);
+        String[] strings = developer.split(";");
         String firstName = strings[1];
         String lastName = strings[2];
         String speciality = strings[3];
-        BigDecimal salary = new BigDecimal(strings[4]);
         Set<Skill> skills = new HashSet<>();
+        BigDecimal salary = new BigDecimal(strings[4]);
 
         String[] skillsId = strings[5].split(",");
         for (String idString : skillsId) {
             skills.add(skillDAO.getById(Long.parseLong(idString)));
         }
 
-        Developer developer = new Developer(firstName, lastName, speciality, skills, salary);
-        developer.setId(id);
-
-        return developer;
+        Developer dev = new Developer(firstName, lastName, speciality, skills, salary);
+        dev.setId(id);
+        return dev;
     }
 }

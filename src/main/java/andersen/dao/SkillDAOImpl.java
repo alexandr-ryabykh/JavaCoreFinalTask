@@ -33,16 +33,14 @@ public class SkillDAOImpl implements CrudDAO<Skill> {
 
     @Override
     public boolean verifyId(Long id) throws IOException {
-
         return verifyId(id, PATH);
     }
 
     public Skill getById(Long id) throws IOException {
         String skillString = read(id);
-        String[] strings = skillString.split(";");
-        Skill skill = new Skill(strings[1]);
+        String[] string = skillString.split(";");
+        Skill skill = new Skill(string[1]);
         skill.setId(id);
-
         return skill;
     }
 }

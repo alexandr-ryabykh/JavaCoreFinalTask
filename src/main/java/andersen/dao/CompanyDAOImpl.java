@@ -29,9 +29,9 @@ public class CompanyDAOImpl implements CrudDAO<Company> {
     public void delete(Long id) throws IOException {
         delete(id, PATH);
     }
+
     @Override
     public boolean verifyId(Long id) throws IOException {
-
         return verifyId(id, PATH);
     }
 }
